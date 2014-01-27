@@ -31,8 +31,8 @@ class CasListener implements ListenerInterface
     {
         try {
             $request = $event->getRequest();
-            if ($cas->isValidationRequest($request)) {
-                $response = $cas->getValidation($request);
+            if ($this->cas->isValidationRequest($request)) {
+                $response = $this->cas->getValidation($request);
                 if ($response->isSuccess()) {
                     $token = new CasUserToken();
                     $token->setUser($response->getUsername());
@@ -40,7 +40,6 @@ class CasListener implements ListenerInterface
                     $this->securityContext->setToken($authToken);
                 }
             }
-            throw new AuthenticationException('The CAS authentication failed.');
         } catch(AuthenticationException $e) {
             $response = new Response();
             $response->setStatusCode(403);

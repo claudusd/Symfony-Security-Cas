@@ -15,8 +15,8 @@ class CasEntryPoint implements AuthenticationEntryPointInterface
         $this->cas = $cas;
     }
 
-    public function start(Request $request, AuthenticationException $authException = null);
+    public function start(Request $request, AuthenticationException $authException = null)
     {
-        return $this->cas->getLoginResponse($request)
+        return $this->cas->getLoginResponse($request);
     }
 }
